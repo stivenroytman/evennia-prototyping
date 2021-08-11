@@ -4,6 +4,7 @@
 BLACK_FORMAT_CONFIGS = --target-version py37 --line-length 100 --exclude=/docs
 TEST_GAME_DIR = .test_game_dir
 TESTS ?= evennia
+PIP=env/bin/pip
 
 default:
 	@echo " Usage: "
@@ -15,7 +16,9 @@ default:
 	@echo "  make testp - run test suite using multiple cores."
 
 install:
-	pip install -e .
+	python -m venv env
+	$(PIP) install --upgrade pip setuptools wheel
+	$(PIP) install -e .
 
 format:
 	black $(BLACK_FORMAT_CONFIGS) evennia
